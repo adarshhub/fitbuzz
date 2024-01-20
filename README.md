@@ -30,4 +30,4 @@ Run the server and visit [localhost:8000/docs](http://localhost:8000/docs) for u
 ## External Libraries
 
 - [Pytest](https://pytest-django.readthedocs.io/en/latest/): For testing API endpoints
-- [drf-yasg]: For API documentation
+- [drf-yasg](https://drf-yasg.readthedocs.io/en/stable/readme.html): For API documentation
