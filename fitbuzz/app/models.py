@@ -20,3 +20,6 @@ class FizzBuzzRequest(models.Model):
 class Stats(models.Model):
     request = models.OneToOneField(FizzBuzzRequest, on_delete=models.CASCADE)
     hits = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["-hits"]
