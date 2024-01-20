@@ -15,6 +15,7 @@ COPY fitbuzz /app/fitbuzz
 
 WORKDIR /app/fitbuzz
 
+RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate
 RUN python manage.py makemigrations app
 RUN python manage.py migrate

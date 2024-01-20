@@ -1,11 +1,16 @@
 from rest_framework import views, response, status
+from drf_yasg.utils import swagger_auto_schema
 from . import serializers
 from . import services
+from . import doc_schemas
 
 
 class FizzBuzzRequest(views.APIView):
+    serializer_class = serializers.FizzBuzzRequestSerializer
+
+    @swagger_auto_schema(request_body=serializer_class, responses=doc_schemas.fitbuzz_response_schema)
     def post(self, request):
-        serializer = serializers.FizzBuzzRequestSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             data = serializer.validated_data
             result = services.create_fitbuzz_request(data)
@@ -15,8 +20,11 @@ class FizzBuzzRequest(views.APIView):
 
 
 class Stats(views.APIView):
+    serializer_class = serializers.FizzBuzzStatsSerializer
+
+    @swagger_auto_schema(responses=doc_schemas.stats_response_schema,)
     def get(self, request):
         stats = services.get_most_used_request()
-        serializer = serializers.FizzBuzzStatsSerializer(instance=stats)
+        serializer = self.serializer_class(instance=stats)
         return response.Response(serializer.data)
 
